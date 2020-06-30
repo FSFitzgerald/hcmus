@@ -1,2 +1,2 @@
-# hcmus
-code learning
+Java
+Hibernate + Swing + Mysql
