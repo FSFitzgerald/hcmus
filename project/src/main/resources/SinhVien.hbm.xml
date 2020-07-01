@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="demo" name="SinhVien" table="sinhvien">
+        <id name="maSinhVien" type="string">
+            <column length="7" name="MaSinhVien"/>
+            <generator class="assigned"/>
+        </id>
+        <property name="hoVaTen" type="string">
+            <column length="45" name="HoVaTen"/>
+        </property>
+        <property name="ngaySinh" type="date">
+            <column length="10" name="NgaySinh"/>
+        </property>
+        <property name="diaChi" type="string">
+            <column length="45" name="DiaChi"/>
+        </property>
+    </class>
+</hibernate-mapping>
