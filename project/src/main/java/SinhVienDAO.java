@@ -1,6 +1,12 @@
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.List;
 
 public class SinhVienDAO {
@@ -18,17 +24,29 @@ public class SinhVienDAO {
         }
         return ds;
     }
+    public static boolean themSinhVien(SinhVien sv){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.save(sv);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
+    public static boolean importDanhSachLop(String fileName){
+        List<SinhVien> ds = ReadCSV.layThongTin(fileName);
+        for(int i = 0; i < ds.size(); i++){
+            SinhVienDAO.themSinhVien(ds.get(i));
+        }
+        return true;
+    }
     public static void main(String args[]){
-        List<SinhVien> ds = SinhVienDAO.layDanhSachSinhVien();
-        if(ds == null){
-            return;
-        }
-        for(int i=0; i<ds.size(); i++){
-            SinhVien sv = ds.get(i);
-            System.out.println("MSSV: "+sv.getMaSinhVien());
-            System.out.println("Họ và tên: "+sv.getHoVaTen());
-            System.out.println("Ngày sinh: " + sv.getNgaySinh());
-            System.out.println("Địa chỉ: "+ sv.getDiaChi());
-        }
+        importDanhSachLop("danhsachsinhvien.csv");
     }
 }

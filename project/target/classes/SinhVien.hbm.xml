@@ -10,11 +10,14 @@
         <property name="hoVaTen" type="string">
             <column length="45" name="HoVaTen"/>
         </property>
-        <property name="ngaySinh" type="date">
-            <column length="10" name="NgaySinh"/>
+        <property name="gioiTinh" type="string">
+            <column length="5" name="GioiTinh"/>
         </property>
-        <property name="diaChi" type="string">
-            <column length="45" name="DiaChi"/>
+        <property name="cMND" type="string">
+            <column length="9" name="CMND"/>
+        </property>
+        <property name="maLop" type="string">
+            <column length="5" name="MaLop"/>
         </property>
     </class>
 </hibernate-mapping>

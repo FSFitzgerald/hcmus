@@ -4,16 +4,19 @@ import java.util.Date;
 public class SinhVien implements Serializable {
     private String maSinhVien;
     private String hoVaTen;
-    private Date ngaySinh;
-    private String diaChi;
+    private String gioiTinh;
+    private String cMND;
+    private String maLop;
     public SinhVien() {
-
     }
-    public SinhVien(String maSinhVien, String hoVaTen, Date ngaySinh, String diaChi) {
+    public SinhVien(String maSinhVien, String hoVaTen, String gioiTinh, String cMND) {
         this.maSinhVien = maSinhVien;
         this.hoVaTen = hoVaTen;
-        this.ngaySinh = ngaySinh;
-        this.diaChi = diaChi;
+        this.gioiTinh = gioiTinh;
+        this.cMND = cMND;
+    }
+    public String getMaLop() {
+        return maLop;
     }
     public String getMaSinhVien() {
         return maSinhVien;
@@ -21,11 +24,14 @@ public class SinhVien implements Serializable {
     public String getHoVaTen() {
         return hoVaTen;
     }
-    public Date getNgaySinh() {
-        return ngaySinh;
+    public String getGioiTinh() {
+        return gioiTinh;
     }
-    public String getDiaChi() {
-        return diaChi;
+    public String getcMND() {
+        return cMND;
+    }
+    public void setMaLop(String maLop) {
+        this.maLop = maLop;
     }
     public void setMaSinhVien(String maSinhVien) {
         this.maSinhVien = maSinhVien;
@@ -33,10 +39,10 @@ public class SinhVien implements Serializable {
     public void setHoVaTen(String hoVaTen) {
         this.hoVaTen = hoVaTen;
     }
-    public void setNgaySinh(Date ngaySinh) {
-        this.ngaySinh = ngaySinh;
+    public void setGioiTinh(String gioiTinh) {
+        this.gioiTinh = gioiTinh;
     }
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setcMND(String cMND) {
+        this.cMND = cMND;
     }
 }
