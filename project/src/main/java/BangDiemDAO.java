@@ -55,6 +55,24 @@ public class BangDiemDAO {
         }
         return true;
     }
+    public static boolean capNhatDiem(BangDiem bd) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        if (bd == null) {
+            return false;
+        }
+        Transaction transaction = null;
+        try {
+            transaction = session.beginTransaction();
+            session.update(bd);
+            transaction.commit();
+        } catch (HibernateException ex) {
+            transaction.rollback();
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return true;
+    }
     public static boolean importBangDiem(String fileName){
         List<BangDiem> bds = ReadCSV.layBangDiem(fileName);
         for(int i = 0; i < bds.size(); i++){
