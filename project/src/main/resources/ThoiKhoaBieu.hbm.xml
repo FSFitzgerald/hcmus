@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="demo" name="ThoiKhoaBieu" table="thoikhoabieu">
+        <composite-id>
+            <key-property name="maBoMon" column="MaBoMon" />
+            <key-property name="maLop" column="MaLop" />
+        </composite-id>
+        <property name="tenMon" type="string">
+            <column length="45" name="TenMon"/>
+        </property>
+        <property name="phongHoc" type="string">
+            <column length="3" name="PhongHoc"/>
+        </property>
+    </class>
+</hibernate-mapping>

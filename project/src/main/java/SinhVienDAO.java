@@ -40,13 +40,10 @@ public class SinhVienDAO {
         return true;
     }
     public static boolean importDanhSachLop(String fileName){
-        List<SinhVien> ds = ReadCSV.layThongTin(fileName);
+        List<SinhVien> ds = ReadCSV.laySinhVien(fileName);
         for(int i = 0; i < ds.size(); i++){
             SinhVienDAO.themSinhVien(ds.get(i));
         }
         return true;
-    }
-    public static void main(String args[]){
-        importDanhSachLop("danhsachsinhvien.csv");
     }
 }
