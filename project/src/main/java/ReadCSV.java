@@ -44,4 +44,27 @@ public class ReadCSV {
         }
         return ds;
     }
+    public static List<BangDiem> layBangDiem(String fileName){
+        CSVReader reader = null;
+        List<BangDiem> ds = new ArrayList<>();
+        try{
+            reader = new CSVReader(new FileReader(fileName));
+            String[] nextLine;
+            while((nextLine = reader.readNext()) != null){
+                BangDiem bd = new BangDiem();
+                bd.setMaSinhVien(nextLine[0]);
+                bd.setMaBoMon(nextLine[1]);
+                bd.setMaLop(nextLine[2]);
+                bd.setHoVaTen(nextLine[3]);
+                bd.setDiemGK(Float.parseFloat(nextLine[4]));
+                bd.setDiemCK(Float.parseFloat(nextLine[5]));
+                bd.setDiemKhac(Float.parseFloat(nextLine[6]));
+                bd.setDiemTong(Float.parseFloat(nextLine[7]));
+                ds.add(bd);
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return ds;
+    }
 }

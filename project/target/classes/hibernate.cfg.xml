@@ -13,5 +13,6 @@
         <mapping resource="SinhVien.hbm.xml" />
         <mapping resource="ThoiKhoaBieu.hbm.xml" />
         <mapping resource="HocPhan.hbm.xml" />
+        <mapping resource="BangDiem.hbm.xml" />
     </session-factory>
 </hibernate-configuration>
