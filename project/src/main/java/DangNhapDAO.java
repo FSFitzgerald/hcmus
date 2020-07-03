@@ -51,4 +51,20 @@ public class DangNhapDAO {
         }
         return true;
     }
+    public static DangNhap layThongTinDangNhap(String tk, String mk) {
+        DangNhap dn = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "from DangNhap dn where dn.taiKhoan=:tk and dn.matKhau=:mk";
+            Query query = session.createQuery(hql);
+            query.setString("tk", tk);
+            query.setString("mk", mk);
+            dn = (DangNhap) query.uniqueResult();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return dn;
+    }
 }
