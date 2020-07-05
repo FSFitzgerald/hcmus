@@ -9,11 +9,12 @@ public class SinhVien implements Serializable {
     private String maLop;
     public SinhVien() {
     }
-    public SinhVien(String maSinhVien, String hoVaTen, String gioiTinh, String cMND) {
+    public SinhVien(String maSinhVien, String hoVaTen, String gioiTinh, String cMND, String maLop) {
         this.maSinhVien = maSinhVien;
         this.hoVaTen = hoVaTen;
         this.gioiTinh = gioiTinh;
         this.cMND = cMND;
+        this.maLop = maLop;
     }
     public String getMaLop() {
         return maLop;

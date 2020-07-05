@@ -19,6 +19,7 @@ public class GUI extends JFrame{
     private JMenu taiKhoan;
     private JMenuItem sinhVienImport;
     private JMenuItem sinhVienXem;
+    private JMenuItem sinhVienThem;
     private JMenuItem thoiKhoaBieuImport;
     private JMenuItem thoiKhoaBieuXem;
     private JMenuItem hocPhanThem;
@@ -122,6 +123,65 @@ public class GUI extends JFrame{
         if(typeUser == "giaovu"){
             sinhVienImport = new JMenuItem("Import danh sách sinh viên");
             sinhVienXem = new JMenuItem("Xem danh sách sinh viên");
+            sinhVienThem = new JMenuItem("Thêm sinh viên vào hệ thống");
+            sinhVienThem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    panel.removeAll();
+                    panel1.removeAll();
+                    for(int i = 0; i < getComponentCount(); i++){
+                        if(getComponent(i) == panel1){
+                            remove(panel1);
+                        }
+                    }
+                    pack();
+                    panel.setLayout(new GridLayout(6, 2));
+                    JLabel mssv = new JLabel("Mã số sinh viên");
+                    JTextField mssvF = new JTextField();
+                    JLabel hvt = new JLabel("Họ và tên");
+                    JTextField hvtF = new JTextField();
+                    JLabel gt = new JLabel("Giới tính");
+                    JTextField gtF = new JTextField();
+                    JLabel cmnd = new JLabel("CMND");
+                    JTextField cmndF = new JTextField();
+                    JLabel lop = new JLabel("Lớp");
+                    JTextField lopF = new JTextField();
+                    JLabel mes = new JLabel();
+                    JButton commit = new JButton("Thêm");
+                    commit.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (mssvF.getText().equals("") || hvtF.getText().equals("") || gtF.getText().equals("") || cmndF.getText().equals("") || lopF.getText().equals("")){
+                                mes.setText("Không để trống");
+                            }else{
+                                SinhVien sv = new SinhVien(mssvF.getText(), hvtF.getText(), gtF.getText(), cmndF.getText(), lopF.getText());
+                                boolean succs = SinhVienDAO.themSinhVien(sv);
+                                if(succs == false){
+                                    mes.setText("Thêm thất bại");
+                                }else{
+                                    remove(panel);
+                                    pack();
+                                    setSize(600, 600);
+                                }
+                            }
+                        }
+                    });
+                    panel.add(mssv);
+                    panel.add(mssvF);
+                    panel.add(hvt);
+                    panel.add(hvtF);
+                    panel.add(gt);
+                    panel.add(gtF);
+                    panel.add(cmnd);
+                    panel.add(cmndF);
+                    panel.add(lop);
+                    panel.add(lopF);
+                    panel.add(mes);
+                    panel.add(commit);
+                    add(panel);
+                    pack();
+                }
+            });
             sinhVienXem.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -185,6 +245,7 @@ public class GUI extends JFrame{
             });
             sinhVien.add(sinhVienImport);
             sinhVien.add(sinhVienXem);
+            sinhVien.add(sinhVienThem);
             thoiKhoaBieuImport = new JMenuItem("Import thời khóa biểu");
             thoiKhoaBieuXem = new JMenuItem("Xem danh thời khóa biểu");
             thoiKhoaBieuXem.addActionListener(new ActionListener() {
