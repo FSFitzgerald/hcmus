@@ -80,4 +80,31 @@ public class BangDiemDAO {
         }
         return true;
     }
+    public static List<BangDiem> layBangDiem() {
+        List<BangDiem> ds = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select bd from BangDiem bd";
+            Query query = session.createQuery(hql);
+            ds = query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
+    }
+    public static List<BangDiem> layBangDiem(String maSinhVien){
+        List<BangDiem> bd = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            String hql = "from BangDiem bd where bd.maSinhVien=:msv";
+            Query query = session.createQuery(hql);
+            query.setString("msv", maSinhVien);
+            bd = query.list();
+        }catch(HibernateException he){
+            he.printStackTrace();
+        }
+        return bd;
+    }
 }

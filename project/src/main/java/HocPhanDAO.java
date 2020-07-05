@@ -37,6 +37,19 @@ public class HocPhanDAO {
         }
         return hp;
     }
+    public static List<HocPhan> layHocPhanSinhVien(String maSinhVien){
+        List<HocPhan> hp = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try{
+            String hql = "from HocPhan hp where hp.maSinhVien=:msv";
+            Query query = session.createQuery(hql);
+            query.setString("msv", maSinhVien);
+            hp = query.list();
+        }catch(HibernateException he){
+            he.printStackTrace();
+        }
+        return hp;
+    }
     public static boolean xoaHocPhan(String maSinhVien, String maBoMon, String maLop){
         Session session = HibernateUtil.getSessionFactory().openSession();
         HocPhan hp = HocPhanDAO.layHocPhan(maSinhVien, maBoMon, maLop);
@@ -74,5 +87,19 @@ public class HocPhanDAO {
             }
         }
         return true;
+    }
+    public static List<HocPhan> layDanhSachHocPhan() {
+        List<HocPhan> ds = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "select hp from HocPhan hp";
+            Query query = session.createQuery(hql);
+            ds = query.list();
+        } catch (HibernateException ex) {
+            System.err.println(ex);
+        } finally {
+            session.close();
+        }
+        return ds;
     }
 }
