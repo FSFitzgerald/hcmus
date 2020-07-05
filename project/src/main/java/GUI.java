@@ -373,9 +373,118 @@ public class GUI extends JFrame{
                 }
             });
             hocPhanHuy = new JMenuItem("Hủy học phần");
-            hocPhanHuy.addActionListener(hl);
+            hocPhanHuy.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    panel.removeAll();
+                    panel1.removeAll();
+                    for(int i = 0; i < getComponentCount(); i++){
+                        if(getComponent(i) == panel1){
+                            remove(panel1);
+                        }
+                    }
+                    pack();
+                    panel.setLayout(new GridLayout(4, 2));
+                    JLabel mssv = new JLabel("Mã số sinh viên");
+                    JTextField mssvF = new JTextField();
+                    JLabel bm = new JLabel("Mã bộ môn");
+                    JTextField bmF = new JTextField();
+                    JLabel lop = new JLabel("Mã lớp");
+                    JTextField lopF = new JTextField();
+                    JLabel mes = new JLabel();
+                    JButton commit = new JButton("Xóa");
+                    commit.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (mssvF.getText().equals("") || bmF.getText().equals("") || lopF.getText().equals("")){
+                                mes.setText("Không để trống");
+                            }else{
+                                boolean succ = HocPhanDAO.xoaHocPhan(mssvF.getText(), bmF.getText(), lopF.getText());
+                                if(succ == false){
+                                    mes.setText("Xóa thất bại");
+                                }else{
+                                    remove(panel);
+                                    pack();
+                                    setSize(600, 600);
+                                }
+                            }
+                        }
+                    });
+                    panel.add(mssv);
+                    panel.add(mssvF);
+                    panel.add(bm);
+                    panel.add(bmF);
+                    panel.add(lop);
+                    panel.add(lopF);
+                    panel.add(mes);
+                    panel.add(commit);
+                    add(panel);
+                    pack();
+                }
+            });
             hocPhanThem = new JMenuItem("Thêm học phần");
-            hocPhanThem.addActionListener(hl);
+            hocPhanThem.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    panel.removeAll();
+                    panel1.removeAll();
+                    for(int i = 0; i < getComponentCount(); i++){
+                        if(getComponent(i) == panel1){
+                            remove(panel1);
+                        }
+                    }
+                    pack();
+                    panel.setLayout(new GridLayout(7, 2));
+                    JLabel mssv = new JLabel("Mã số sinh viên");
+                    JTextField mssvF = new JTextField();
+                    JLabel bm = new JLabel("Mã bộ môn");
+                    JTextField bmF = new JTextField();
+                    JLabel lop = new JLabel("Mã lớp");
+                    JTextField lopF = new JTextField();
+                    JLabel hvt = new JLabel("Họ và tên");
+                    JTextField hvtF = new JTextField();
+                    JLabel gt = new JLabel("Giới tính");
+                    JTextField gtF = new JTextField();
+                    JLabel cmnd = new JLabel("CMND");
+                    JTextField cmndF = new JTextField();
+                    JLabel mes = new JLabel();
+                    JButton commit = new JButton("Thêm");
+                    commit.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            if (mssvF.getText().equals("") || bmF.getText().equals("") || lopF.getText().equals("") || hvtF.getText().equals("") || gtF.getText().equals("") || cmndF.getText().equals("")){
+                                mes.setText("Không để trống");
+                            }else{
+                                HocPhan hp = new HocPhan(mssvF.getText(), bmF.getText(), lopF.getText(), hvtF.getText(), gtF.getText(), cmndF.getText());
+                                boolean sucss =HocPhanDAO.themHocPhan(hp);
+                                if(sucss == false){
+                                    mes.setText("Thêm thất bại");
+                                }else{
+                                    remove(panel);
+                                    pack();
+                                    setSize(600, 600);
+                                }
+                            }
+                        }
+                    });
+                    panel.add(mssv);
+                    panel.add(mssvF);
+                    panel.add(bm);
+                    panel.add(bmF);
+                    panel.add(lop);
+                    panel.add(lopF);
+                    panel.add(hvt);
+                    panel.add(hvtF);
+                    panel.add(gt);
+                    panel.add(gtF);
+                    panel.add(cmnd);
+                    panel.add(cmndF);
+                    panel.add(mes);
+                    panel.add(commit);
+                    add(panel);
+                    pack();
+                }
+            });
             hocPhan.add(hocPhanXem);
             hocPhan.add(hocPhanHuy);
             hocPhan.add(hocPhanThem);
